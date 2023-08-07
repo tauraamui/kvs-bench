@@ -3,8 +3,11 @@ module github.com/tauraamui/kvs-bench
 go 1.20
 
 require (
+	github.com/dgraph-io/badger/v3 v3.2103.5
 	github.com/tauraamui/kvs/v2 v2.1.0
 	github.com/timshannon/badgerhold v1.0.0
+	gorm.io/driver/sqlite v1.5.2
+	gorm.io/gorm v1.25.2
 )
 
 require (
@@ -12,7 +15,6 @@ require (
 	github.com/cespare/xxhash v1.1.0 // indirect
 	github.com/cespare/xxhash/v2 v2.1.1 // indirect
 	github.com/dgraph-io/badger v1.6.0 // indirect
-	github.com/dgraph-io/badger/v3 v3.2103.5 // indirect
 	github.com/dgraph-io/ristretto v0.1.1 // indirect
 	github.com/dgryski/go-farm v0.0.0-20190423205320-6a90982ecee2 // indirect
 	github.com/dustin/go-humanize v1.0.0 // indirect
@@ -23,7 +25,10 @@ require (
 	github.com/golang/snappy v0.0.3 // indirect
 	github.com/google/flatbuffers v1.12.1 // indirect
 	github.com/google/uuid v1.3.0 // indirect
+	github.com/jinzhu/inflection v1.0.0 // indirect
+	github.com/jinzhu/now v1.1.5 // indirect
 	github.com/klauspost/compress v1.12.3 // indirect
+	github.com/mattn/go-sqlite3 v1.14.17 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	go.opencensus.io v0.22.5 // indirect
 	golang.org/x/net v0.3.0 // indirect
