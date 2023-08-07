@@ -6,6 +6,7 @@ import (
 
 	"github.com/dgraph-io/badger/v3"
 	"github.com/tauraamui/kvs/v2"
+	"github.com/tauraamui/kvs/v2/query"
 	"github.com/tauraamui/kvs/v2/storage"
 )
 
@@ -72,7 +73,37 @@ func BenchmarkKVSLoad500Records(b *testing.B) {
 	b.StopTimer()
 }
 
-func BenchmarkKVSLoad1000Records(b *testing.B) {
+func BenchmarkKVSLoad100RecordsQueryColour(b *testing.B) {
+	defer func() {
+		os.RemoveAll("./data")
+	}()
+	conn, err := badger.Open(badger.DefaultOptions("").WithLogger(nil).WithDir("data").WithValueDir("data"))
+	db, err := kvs.NewKVDB(conn)
+
+	if err != nil {
+		b.Fatal(err)
+	}
+	defer db.Close()
+
+	store := storage.New(db)
+	defer store.Close()
+
+	for i := 0; i < 100; i++ {
+		color := "RED"
+		if i%2 == 0 {
+			color = "BLUE"
+		}
+		store.Save(kvs.RootOwner{}, &Balloon{Color: color, Size: i})
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		query.Run[Balloon](store, kvs.RootOwner{}, query.New().Filter("color").Eq("RED"))
+	}
+	b.StopTimer()
+}
+
+func BenchmarkKVSLoad500RecordsQueryColour(b *testing.B) {
 	defer func() {
 		os.RemoveAll("./data")
 	}()
@@ -97,7 +128,7 @@ func BenchmarkKVSLoad1000Records(b *testing.B) {
 
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		storage.LoadAll[Balloon](store, kvs.RootOwner{})
+		query.Run[Balloon](store, kvs.RootOwner{}, query.New().Filter("color").Eq("RED"))
 	}
 	b.StopTimer()
 }
