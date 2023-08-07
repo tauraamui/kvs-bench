@@ -103,6 +103,36 @@ func BenchmarkKVSLoad100RecordsQueryColour(b *testing.B) {
 	b.StopTimer()
 }
 
+func BenchmarkKVSLoad500RecordsQuerySizeNoMatches(b *testing.B) {
+	defer func() {
+		os.RemoveAll("./data")
+	}()
+	conn, err := badger.Open(badger.DefaultOptions("").WithLogger(nil).WithDir("data").WithValueDir("data"))
+	db, err := kvs.NewKVDB(conn)
+
+	if err != nil {
+		b.Fatal(err)
+	}
+	defer db.Close()
+
+	store := storage.New(db)
+	defer store.Close()
+
+	for i := 0; i < 500; i++ {
+		color := "RED"
+		if i%2 == 0 {
+			color = "BLUE"
+		}
+		store.Save(kvs.RootOwner{}, &Balloon{Color: color, Size: i})
+	}
+
+	b.ResetTimer()
+	for i := 0; i < b.N; i++ {
+		query.Run[Balloon](store, kvs.RootOwner{}, query.New().Filter("size").Eq(988))
+	}
+	b.StopTimer()
+}
+
 func BenchmarkKVSLoad500RecordsQueryColour(b *testing.B) {
 	defer func() {
 		os.RemoveAll("./data")
