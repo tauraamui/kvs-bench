@@ -1,5 +1,6 @@
 # Benchmarks
 
+```
 goos: linux
 goarch: amd64
 pkg: github.com/tauraamui/kvs-bench
@@ -17,3 +18,4 @@ BenchmarkKVSLoad500RecordsQueryColour-4          	     496	   2703187 ns/op
 BenchmarkSLLoad-4                                	   12842	     91069 ns/op
 PASS
 ok  	github.com/tauraamui/kvs-bench	53.426s
+```
