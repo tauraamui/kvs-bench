@@ -1,5 +1,6 @@
 # Benchmarks
 
+Here you can see benchmarks showing speed differences of equivalent operations implemented using KVS, Badgerhold and SQLite respectfully.
 ```
 goos: linux
 goarch: amd64
