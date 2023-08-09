@@ -2,21 +2,25 @@
 
 Here you can see benchmarks showing speed differences of equivalent operations implemented using KVS, Badgerhold and SQLite respectfully.
 ```
-goos: linux
-goarch: amd64
+go test -bench=.
+goos: darwin
+goarch: arm64
 pkg: github.com/tauraamui/kvs-bench
-cpu: Intel(R) Core(TM) i5-8200Y CPU @ 1.30GHz
-BenchmarkBHLoad-4                                	   13290	     94342 ns/op
-BenchmarkBHLoad500Records-4                      	      72	  14768587 ns/op
-BenchmarkBHLoad100RecordsQueryColour-4           	     400	   3086616 ns/op
-BenchmarkBHLoad500RecordsQuerySizeNoMatches-4    	      88	  14084911 ns/op
-BenchmarkBHLoad500RecordsQueryColour-4           	      73	  17030642 ns/op
-BenchmarkKVSLoad-4                               	   57556	     20270 ns/op
-BenchmarkKVSLoad500Records-4                     	     494	   2786213 ns/op
-BenchmarkKVSLoad100RecordsQueryColour-4          	    1654	    679295 ns/op
-BenchmarkKVSLoad500RecordsQuerySizeNoMatches-4   	     429	   3191895 ns/op
-BenchmarkKVSLoad500RecordsQueryColour-4          	     496	   2703187 ns/op
-BenchmarkSLLoad-4                                	   12842	     91069 ns/op
+BenchmarkBHLoad-8                                	   44186	     26428 ns/op
+BenchmarkBHLoad500Records-8                      	     264	   4526775 ns/op
+BenchmarkBHLoad100RecordsQueryColour-8           	    1276	    938912 ns/op
+BenchmarkBHLoad500RecordsQuerySizeNoMatches-8    	     259	   4615119 ns/op
+BenchmarkBHLoad500RecordsQueryColour-8           	     259	   4618628 ns/op
+BenchmarkKVSLoad-8                               	  120360	      9933 ns/op
+BenchmarkKVSLoad500Records-8                     	    2215	    540268 ns/op
+BenchmarkKVSLoad100RecordsQueryColour-8          	    9252	    139602 ns/op
+BenchmarkKVSLoad500RecordsQuerySizeNoMatches-8   	    2235	    539261 ns/op
+BenchmarkKVSLoad500RecordsQueryColour-8          	    2480	    484517 ns/op
+BenchmarkSLLoad-8                                	   60076	     19706 ns/op
+BenchmarkSLLoad500Records-8                      	     802	   1495841 ns/op
+BenchmarkSLLoad100RecordsQueryColour-8           	    7113	    166161 ns/op
+BenchmarkSLLoad500RecordsQuerySizeNoMatches-8    	   24186	     49457 ns/op
+BenchmarkSLLoad500RecordsQueryColour-8           	    7190	    166854 ns/op
 PASS
-ok  	github.com/tauraamui/kvs-bench	53.426s
+ok  	github.com/tauraamui/kvs-bench	24.693s
 ```
